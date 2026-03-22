@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, Shield } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { CheckoutModal } from "@/components/CheckoutModal";
@@ -88,7 +88,14 @@ const PricingSection = () => {
             <ArrowRight className="h-5 w-5" />
           </Button>
 
-          <p className="mt-4 text-xs text-muted-foreground">
+          <div className="mt-4 rounded-lg bg-accent/10 border border-accent/30 p-4">
+            <p className="text-sm font-semibold text-accent text-center flex items-center justify-center gap-2">
+              <Shield className="h-4 w-4" />
+              Garantia de 7 dias ou seu dinheiro de volta
+            </p>
+          </div>
+
+          <p className="mt-3 text-xs text-muted-foreground">
             Pagamento seguro via cartão de crédito ou PIX
           </p>
         </motion.div>
