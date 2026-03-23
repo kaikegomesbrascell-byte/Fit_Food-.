@@ -12,13 +12,13 @@ const ThankYou = () => {
   }, []);
 
   const handleDownload = () => {
-    // Trigger download
-    window.location.href = "/downloads/lead-extractor.zip";
+    // Trigger download from public folder
+    window.location.href = "/lead-extractor.zip";
   };
 
   const handleWhatsAppSupport = () => {
     // Substitua pelo seu número de WhatsApp (formato: 5511999999999)
-    const phoneNumber = "5511999999999"; // ALTERE AQUI
+    const phoneNumber = "5516994260416"; // ALTERE AQUI
     const message = encodeURIComponent("Olá! Acabei de adquirir o LeadExtract e preciso de ajuda com a instalação.");
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
   };
