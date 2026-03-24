@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeadExtract 6.0 - Inteligência de Estado para Vendas B2B</title>
+    <meta name="description" content="Pare de bater na porta de quem não quer comprar. Domine o mercado com Inteligência de Estado.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-blue: #00D9FF;
+            --emerald: #10B981;
+            --dark-bg: #0A0A0A;
+            --dark-card: #111111;
+            --dark-border: #1F1F1F;
+            --text-primary: #FFFFFF;
+            --text-secondary: #A0A0A0;
+            --glass-bg: rgba(17, 17, 17, 0.7);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animated {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 217, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            padding: 24px 0;
+            backdrop-filter: blur(20px);
+            background: var(--glass-bg);
+            border-bottom: 1px solid var(--dark-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--neon-blue), var(--emerald));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--glass-bg);
+            border: 1px solid var(--dark-border);
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--neon-blue);
+            margin-bottom: 32px;
+            backdrop-filter: blur(20px);
+        }
+
+        h1 {
+            font-size: clamp(40px, 6vw, 72px);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--neon-blue), var(--emerald));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(18px, 2.5vw, 24px);
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto 48px;
+            line-height: 1.6;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 40px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--emerald));
+            color: var(--dark-bg);
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 40px rgba(0, 217, 255, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 60px rgba(0, 217, 255, 0.5);
+        }
+
+        /* Dashboard Mockup */
+        .dashboard-mockup {
+            margin: 80px 0;
+            position: relative;
+        }
+
+        .mockup-container {
+            background: var(--glass-bg);
+            border: 1px solid var(--dark-border);
+            border-radius: 24px;
+            padding: 24px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .mockup-header {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .mockup-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--dark-border);
+        }
+
+        .mockup-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .mockup-table th {
+            text-align: left;
+            padding: 16px;
+            background: var(--dark-card);
+            border-bottom: 1px solid var(--dark-border);
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .mockup-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--dark-border);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-hot {
+            background: rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+        }
+
+        .status-warm {
+            background: rgba(251, 191, 36, 0.2);
+            color: #FBBF24;
+        }
+
+        .status-cold {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3B82F6;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 800;
+            margin-bottom: 64px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--dark-border);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(20px);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon-blue);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--neon-blue), var(--emerald));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-bottom: 24px;
+        }
+
+        .feature-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Exclusivity Section */
+        .exclusivity {
+            padding: 120px 0;
+            text-align: center;
+        }
+
+        .exclusivity-card {
+            background: var(--glass-bg);
+            border: 2px solid var(--neon-blue);
+            border-radius: 24px;
+            padding: 64px 40px;
+            backdrop-filter: blur(20px);
+            max-width: 900px;
+            margin: 0 auto;
+            box-shadow: 0 0 80px rgba(0, 217, 255, 0.2);
+        }
+
+        .exclusivity-title {
+            font-size: clamp(28px, 3vw, 40px);
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: var(--neon-blue);
+        }
+
+        .exclusivity-text {
+            font-size: 20px;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 60px 0;
+            border-top: 1px solid var(--dark-border);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0 60px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mockup-table {
+                font-size: 12px;
+            }
+
+            .mockup-table th,
+            .mockup-table td {
+                padding: 12px 8px;
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animated"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">LeadExtract 6.0</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-badge">🔥 Inteligência de Estado para Vendas B2B</div>
+            
+            <h1>
+                Pare de bater na porta<br>
+                de quem <span class="gradient-text">não quer comprar</span>
+            </h1>
+            
+            <p class="hero-subtitle">
+                O LeadExtract 6.0 não entrega listas. Ele entrega o diagnóstico financeiro, 
+                técnico e o contato direto do dono das empresas que têm dinheiro para fechar com você HOJE.
+            </p>
+            
+            <a href="https://wa.me/5516994260416?text=Quero%20o%20Raio-X%20da%20minha%20Região" class="cta-button">
+                <span>📱</span>
+                Quero o Raio-X da minha Região
+            </a>
+        </div>
+    </section>
+
+    <!-- Dashboard Mockup -->
+    <section class="dashboard-mockup">
+        <div class="container">
+            <div class="mockup-container float-animation">
+                <div class="mockup-header">
+                    <div class="mockup-dot"></div>
+                    <div class="mockup-dot"></div>
+                    <div class="mockup-dot"></div>
+                </div>
+                
+                <table class="mockup-table">
+                    <thead>
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Saúde Digital</th>
+                            <th>Gatilho de Expansão</th>
+                            <th>WhatsApp do Dono</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Solar Tech Pro</strong></td>
+                            <td>3/10 🔥</td>
+                            <td>Inaugurou 2 filiais</td>
+                            <td>(16) 99999-8888</td>
+                            <td><span class="status-badge status-hot">QUENTE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Clínica Essence</strong></td>
+                            <td>5/10 ⚡</td>
+                            <td>Contratando 5 médicos</td>
+                            <td>(11) 98888-7777</td>
+                            <td><span class="status-badge status-warm">MORNO</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Energia Verde SP</strong></td>
+                            <td>8/10 ❄️</td>
+                            <td>Sem sinais recentes</td>
+                            <td>(11) 97777-6666</td>
+                            <td><span class="status-badge status-cold">FRIO</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">
+                Não é uma lista.<br>
+                É <span class="gradient-text">Espionagem Comercial</span>
+            </h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Não é Scraping</h3>
+                    <p class="feature-description">
+                        É Espionagem Comercial. Analisamos 6 tecnologias de marketing, 
+                        maturidade digital e gaps de investimento. Você sabe exatamente 
+                        onde a empresa está sangrando dinheiro.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3 class="feature-title">Não é E-mail</h3>
+                    <p class="feature-description">
+                        É WhatsApp do Tomador de Decisão. Nada de secretária ou email 
+                        genérico. Você fala direto com quem assina o cheque.
+                    </p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">Não é Telefone</h3>
+                    <p class="feature-description">
+                        É Gatilho de Contratação e Expansão. Notícias de inauguração, 
+                        contratação em massa, investimentos recebidos. Você liga no 
+                        momento exato em que eles precisam de você.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Exclusivity Section -->
+    <section class="exclusivity">
+        <div class="container">
+            <div class="exclusivity-card">
+                <h2 class="exclusivity-title">⚠️ Exclusividade Territorial</h2>
+                <p class="exclusivity-text">
+                    Eu não vendo para todos. Mapeio sua região e entrego a chave do mercado 
+                    para <strong>apenas UMA empresa por setor</strong>.<br><br>
+                    Se o seu concorrente fechar primeiro, você fica no escuro.
+                </p>
+                <a href="https://wa.me/5516994260416?text=Quero%20garantir%20minha%20exclusividade" class="cta-button">
+                    <span>🔒</span>
+                    Garantir Minha Exclusividade Agora
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 LeadExtract 6.0. Todos os direitos reservados.</p>
+            <p style="margin-top: 8px; font-size: 14px;">
+                Inteligência de Estado para Vendas B2B High-Ticket
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Track CTA clicks
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function() {
+                console.log('CTA clicked:', this.textContent);
+                // Add analytics tracking here
+            });
+        });
+    </script>
+</body>
+</html>
