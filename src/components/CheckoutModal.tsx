@@ -366,8 +366,15 @@ export const CheckoutModal = ({ open, onOpenChange }: CheckoutModalProps) => {
 
             <div className="rounded-lg bg-muted p-4 space-y-3">
               <p className="text-sm font-semibold text-center">Código PIX</p>
-              <div className="bg-white rounded border border-border p-3 break-all font-mono text-xs leading-relaxed">
-                {pixData?.pixCode || "Gerando código PIX..."}
+              <div className="bg-accent/5 rounded-lg border-2 border-accent p-4 space-y-2">
+                <p className="text-xs text-muted-foreground text-center mb-2">Copie e cole no seu banco:</p>
+                <div 
+                  className="bg-white rounded border-2 border-accent/30 p-4 break-all font-mono text-sm font-bold text-foreground leading-relaxed cursor-pointer transition hover:bg-accent/10 hover:border-accent/50"
+                  onClick={copyPixCode}
+                  title="Clique para copiar"
+                >
+                  {pixData?.pixCode || "Gerando código PIX..."}
+                </div>
               </div>
               <Button
                 className="w-full gap-2"
