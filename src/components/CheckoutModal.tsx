@@ -138,16 +138,44 @@ export const CheckoutModal = ({ open, onOpenChange }: CheckoutModalProps) => {
         console.log("Campos disponíveis:", Object.keys(data));
         console.log("Tentando extrair QR Code...");
         
-        // A API da SigiloPay retorna os dados dentro do objeto "pix"
+        // A API da SigiloPay retorna os dados dentro do objeto "pix", muitas vezes em pix.pix
         const pixInfo = data.pix || data;
-        
-        // Tentar diferentes campos para o QR Code
-        const qrCodeImage = pixInfo.base64 || data.qrCode || data.qrcode || data.qr_code || data.image || data.qrCodeBase64 || data.qrCodeImage;
-        const pixCode = pixInfo.code || data.pixCopyPaste || data.brCode || data.emv || data.pix_copy_paste || data.code || data.payload;
-        
+        const payload = pixInfo.pix || pixInfo;
+
+        // Tentar diferentes campos para o QR Code e para o código PIX
+        const qrCodeImage =
+          payload.base64 ||
+          payload.qrCode ||
+          payload.qrcode ||
+          payload.qr_code ||
+          payload.image ||
+          payload.qrCodeBase64 ||
+          payload.qrCodeImage ||
+          pixInfo.base64 ||
+          pixInfo.qrCode ||
+          pixInfo.qrcode ||
+          pixInfo.qr_code ||
+          pixInfo.image ||
+          "";
+
+        const pixCode =
+          payload.code ||
+          payload.pixCopyPaste ||
+          payload.brCode ||
+          payload.emv ||
+          payload.pix_copy_paste ||
+          payload.payload ||
+          pixInfo.code ||
+          pixInfo.pixCopyPaste ||
+          pixInfo.brCode ||
+          pixInfo.emv ||
+          pixInfo.pix_copy_paste ||
+          pixInfo.payload ||
+          "";
+
         console.log("QR Code encontrado:", qrCodeImage ? "SIM" : "NÃO");
         console.log("PIX Code encontrado:", pixCode ? "SIM" : "NÃO");
-        
+
         setPixData({
           qrCode: qrCodeImage || "",
           pixCode: pixCode || "Código PIX não disponível",
