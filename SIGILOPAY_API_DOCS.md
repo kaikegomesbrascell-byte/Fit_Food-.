@@ -33,8 +33,7 @@ POST /gateway/pix/receive
 ### Request Body
 ```json
 {
-  "identifier": "lead-extractor-1234567890",
-  "amount": 297,
+  "identifier": "lead-extractor-1234567890",\n  "amount": 1000,
   "client": {
     "name": "Nome do Cliente",
     "email": "email@exemplo.com",
@@ -90,7 +89,7 @@ POST /gateway/checkout
 {
   "product": {
     "name": "Nome do Produto",
-    "price": 297
+    "price": 1000
   },
   "customer": {
     "name": "Nome do Cliente",

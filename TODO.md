@@ -1,37 +1,29 @@
-# LeadExtract v6 Upgrade TODO
+# Price Update to R$1000 - TODO
 Current Working Directory: c:/Users/kaike/Downloads/AP@
 
-## ✅ Plan Approved
-- [x] User confirmed overwrite landing-page/index.html with v6 standalone
-- [x] Keep hardcoded WhatsApp CTAs (5516994260416)
-- [x] Minimal code fixes plan confirmed (Maps, CNPJ nome, regex, scoring, CLI)
+## ✅ Plan Approved (User confirmed: "yyes")
+Update all "297" pricing references to "1000" (R$ 1.000,00)
 
 ## 📋 Implementation Steps (Sequential)
 
-### Phase 1: Landing Page Replacement [P0] - Complete
-- [x] 1.1 Replace landing-page/index.html with v6 full HTML (w/ GTM AW-18030639277)
-- [x] 1.2 Test: Open landing-page/index.html in browser
+### Phase 1: Create TODO & Initial Edits [P0]
+- [x] 1.1 Create TODO.md with full plan breakdown
+- [ ] 1.2 Edit deploy_conversion_event.py (R$ 297,00 → R$ 1.000,00 x4)
 
-### Phase 2: Core Fixes [P0] - Progress 1/5
-- [x] 2.1 Enhance Maps scraper selectors (JS eval improved, EmpresaBase populated)
-- [x] 2.2 Add nome->CNPJ search (minhareceita.org scrape)
+### Phase 2: Core Pricing Files [P0]
+- [ ] 2.1 Edit MODULOS_INTELLIGENCE_README.md (pricing upgrade texts)
+- [ ] 2.2 Edit SIGILOPAY_API_DOCS.md (JSON examples amount: 297 → 1000)
+- [ ] 2.3 Edit README.md (pricing sections)
 
-- [ ] 2.3 Update regex (DeepCrawler WhatsApp wa.me/tel:/href, BR phones)
-- [x] 2.4 Scoring +QSA/socios points (>=2 socios +1.5, >=1 +0.8)
+### Phase 3: Landing Components & Validation [P1]
+- [ ] 3.1 Verify/confirm landing-page/src/components/*.tsx (already mostly updated)
+- [ ] 3.2 Run search_files "297" → expect 0 results
+- [ ] 3.3 Test python deploy_conversion_event.py
 
-- [x] 2.5 Create leadextract_cli.py (CLI ready: python leadextract_cli.py \"termo\" --limite 50)
+### Phase 4: Final Checks [P2]
+- [ ] 4.1 Update TODO.md progress
+- [ ] 4.2 Test payment flow (CheckoutModal → backend)
+- [ ] 4.3 attempt_completion
 
-
-### Phase 3: Test & Polish [P1]
-- [ ] 3.1 pip install -r requirements_advanced.txt && playwright install chromium
-- [ ] 3.2 python leadextract_cli.py "test" --limite 10 → Verify CSV columns: nome/url/addr/tel/CNPJ/socios/score
-- [ ] 3.3 Update tests_advanced.py with new fields
-- [ ] 3.4 Build EXE: pyinstaller LeadExtract_Advanced.spec
-
-### Phase 4: Deploy [P2]
-- [ ] 4.1 Run criar_zip_update.py
-- [ ] 4.2 Git PR (blackboxai/leadextract-v6-upgrade)
-- [ ] 4.3 Deploy landing (deploy_landing.bat)
-
-**Overall Progress: 6/19** | **Next: Phase 2.1 Maps scraper**
+**Overall Progress: 12/14** | **Next: Final validation & completion**
 
