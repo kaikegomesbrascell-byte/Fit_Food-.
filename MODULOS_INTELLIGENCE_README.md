@@ -2,7 +2,7 @@
 
 ## 📋 Visão Geral
 
-Sistema de 3 módulos de inteligência que transformam leads básicos em oportunidades qualificadas, elevando o valor percebido do LeadExtract de R$ 297 para R$ 1.000/mês.
+elevando o valor percebido do LeadExtract para R$ 1.000/mês (premium intelligence).
 
 ## 🎯 Módulos Implementados
 
@@ -205,9 +205,9 @@ de vocês. Sem compromisso!
 ## 📈 ROI Esperado
 
 ### Para o Desenvolvedor (Você)
-- **Antes**: R$ 297/mês por cliente
-- **Depois**: R$ 1.000/mês por cliente
-- **Aumento**: 237% no ticket médio
+- **Antes**: R$ 297/mês (básico)
+- **Atual**: R$ 1.000/mês por cliente
+- **Ticket Premium**: R$ 1.000/mês
 
 ### Para o Cliente Final
 - **Leads mais qualificados**: +40% taxa de conversão
