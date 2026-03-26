@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2, Copy, Check, CreditCard, QrCode } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { API_BASE_URL } from "@/lib/api";
 
 interface CheckoutModalProps {
   open: boolean;
@@ -218,13 +219,13 @@ export const CheckoutModal = ({ open, onOpenChange }: CheckoutModalProps) => {
         let usesFallback = false;
 
         try {
-          const response = await fetch("http://localhost:3001/api/payment/pix", {
+          const response = await fetch(`${API_BASE_URL}/api/payment-pix`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(requestBody),
-            signal: AbortSignal.timeout(5000), // Timeout de 5 segundos
+            signal: AbortSignal.timeout(10000), // Timeout de 10 segundos
           });
 
           if (!response.ok) {
