@@ -13,6 +13,8 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ||
 interface CheckoutModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  planAmount?: number; // Valor do plano em reais (97 ou 1000)
+  planName?: string; // Nome do plano
 }
 
 type CheckoutFormData = {
@@ -22,7 +24,7 @@ type CheckoutFormData = {
   phone: string;
 };
 
-export const CheckoutModal = ({ open, onOpenChange }: CheckoutModalProps) => {
+export const CheckoutModal = ({ open, onOpenChange, planAmount = 97, planName = "Plano Start" }: CheckoutModalProps) => {
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -205,7 +207,7 @@ export const CheckoutModal = ({ open, onOpenChange }: CheckoutModalProps) => {
         // Formato correto da API SigiloPay
         const requestBody = {
           identifier: `lead-extractor-${Date.now()}`,
-          amount: 1000,
+          amount: planAmount,
           client: {
             name: formData.name,
             email: formData.email,
@@ -446,8 +448,8 @@ export const CheckoutModal = ({ open, onOpenChange }: CheckoutModalProps) => {
             )}
 
             <div className="rounded-lg bg-muted p-4 text-center">
-              <p className="text-sm font-semibold mb-1">Valor Mensal</p>
-              <p className="text-2xl font-bold text-accent">R$ 1.000,00</p>
+              <p className="text-sm font-semibold mb-1">{planName}</p>
+              <p className="text-2xl font-bold text-accent">R$ {planAmount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
             </div>
 
             <Button

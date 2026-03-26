@@ -21,6 +21,12 @@ const ease = [0.16, 1, 0.3, 1] as const;
 
 const PricingSection = () => {
   const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<{ amount: number; name: string }>({ amount: 97, name: "Plano Start - R$ 97/mês" });
+
+  const openCheckout = (amount: number, name: string) => {
+    setSelectedPlan({ amount, name });
+    setCheckoutOpen(true);
+  };
 
   return (
     <section
@@ -32,7 +38,12 @@ const PricingSection = () => {
           "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(0,212,255,0.06) 0%, transparent 70%)",
       }}
     >
-      <CheckoutModal open={checkoutOpen} onOpenChange={setCheckoutOpen} />
+      <CheckoutModal 
+        open={checkoutOpen} 
+        onOpenChange={setCheckoutOpen}
+        planAmount={selectedPlan.amount}
+        planName={selectedPlan.name}
+      />
       <div className="mx-auto max-w-2xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -179,7 +190,7 @@ const PricingSection = () => {
                 border: "none",
                 cursor: "pointer",
               }}
-              onClick={() => setCheckoutOpen(true)}
+              onClick={() => openCheckout(97, "Plano Start - R$ 97/mês")}
               onMouseEnter={e => {
                 (e.currentTarget as HTMLButtonElement).style.boxShadow =
                   "0 0 50px rgba(0,212,255,0.5)";
