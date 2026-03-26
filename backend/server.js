@@ -176,8 +176,8 @@ app.post('/api/payment/pix', async (req, res) => {
             amount: amount,
             method: 'pix',
             status: 'pending',
-            pix_qr_code: response.data.qr_code || null,
-            pix_key: response.data.pix_key || null,
+            pix_qr_code: sigiloResponseData.qr_code || sigiloResponseData.pix?.qrCode || null,
+            pix_key: sigiloResponseData.pix_key || sigiloResponseData.pix?.code || null,
             sigilopay_id: sigiloResponseData.id || identifier,
           })
           .select()
