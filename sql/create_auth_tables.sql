@@ -36,12 +36,14 @@ CREATE INDEX IF NOT EXISTS idx_subscriptions_expires_at ON subscriptions(expires
 
 -- 4. Função para atualizar updated_at automaticamente
 CREATE OR REPLACE FUNCTION update_updated_at_column()
-RETURNS TRIGGER AS $$
+RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $function$
 BEGIN
   NEW.updated_at = NOW();
   RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+$function$;
 
 -- 5. Triggers para updated_at
 CREATE TRIGGER update_user_profiles_updated_at
@@ -83,7 +85,10 @@ CREATE POLICY "Usuários podem ver sua própria assinatura"
 
 -- 7. Função para verificar se assinatura está ativa
 CREATE OR REPLACE FUNCTION is_subscription_active(p_user_id UUID)
-RETURNS BOOLEAN AS $$
+RETURNS BOOLEAN
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $function$
 DECLARE
   v_subscription RECORD;
 BEGIN
@@ -106,11 +111,14 @@ BEGIN
   -- Verificar se não expirou
   RETURN v_subscription.expires_at > NOW();
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$function$;
 
 -- 8. Função para expirar assinaturas automaticamente (pode ser chamada por cron)
 CREATE OR REPLACE FUNCTION expire_subscriptions()
-RETURNS INTEGER AS $$
+RETURNS INTEGER
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $function$
 DECLARE
   v_count INTEGER;
 BEGIN
@@ -123,7 +131,7 @@ BEGIN
   GET DIAGNOSTICS v_count = ROW_COUNT;
   RETURN v_count;
 END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
+$function$;
 
 -- 9. Dados de exemplo (REMOVER EM PRODUÇÃO)
 -- Inserir perfil de teste
