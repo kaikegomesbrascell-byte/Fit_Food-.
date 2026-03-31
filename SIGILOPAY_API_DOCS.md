@@ -18,8 +18,10 @@ Todas as requisições precisam dos seguintes headers:
 ```
 
 ### Suas Credenciais
-- **Public Key**: `kaikegomesbrascell_dj5xs7rlxoaoew4z`
-- **Secret Key**: `nvt3mku331xhv1d8oxmqfnp20tjecpacan3v5gk0n276u5kkhexqieuz8y3cmc9f`
+- **Public Key**: Configurada via variável de ambiente `SIGILOPAY_PUBLIC_KEY`
+- **Secret Key**: Configurada via variável de ambiente `SIGILOPAY_SECRET_KEY`
+
+**Nota:** Nunca exponha suas credenciais no código. Use sempre variáveis de ambiente.
 
 ---
 
@@ -249,8 +251,8 @@ app.use(cors());
 app.use(express.json());
 
 const SIGILOPAY_CONFIG = {
-  publicKey: 'kaikegomesbrascell_dj5xs7rlxoaoew4z',
-  secretKey: 'nvt3mku331xhv1d8oxmqfnp20tjecpacan3v5gk0n276u5kkhexqieuz8y3cmc9f',
+  publicKey: process.env.SIGILOPAY_PUBLIC_KEY,
+  secretKey: process.env.SIGILOPAY_SECRET_KEY,
   baseUrl: 'https://app.sigilopay.com.br/api/v1'
 };
 

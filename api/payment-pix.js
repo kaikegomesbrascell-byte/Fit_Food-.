@@ -2,8 +2,8 @@ const axios = require('axios');
 const { createClient } = require('@supabase/supabase-js');
 
 // Configuração Supabase
-const supabaseUrl = process.env.VITE_SUPABASE_URL || 'https://blodznzrdzjsvaqabsvj.supabase.co';
-const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'sb_publishable_yctKLARtWlYpbZzk0dkx1w_e9Udi8cA';
+const supabaseUrl = process.env.VITE_SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey, {
   auth: {
@@ -15,8 +15,8 @@ const supabase = createClient(supabaseUrl, supabaseServiceKey, {
 // Credenciais SigiloPay
 const SIGILOPAY_CONFIG = {
   baseURL: 'https://app.sigilopay.com.br/api/v1',
-  publicKey: process.env.SIGILOPAY_PUBLIC_KEY || 'kaikegomesbrascell_dj5xs7rlxoaoew4z',
-  secretKey: process.env.SIGILOPAY_SECRET_KEY || 'nvt3mku331xhv1d8oxmqfnp20tjecpacan3v5gk0n276u5kkhexqieuz8y3cmc9f',
+  publicKey: process.env.SIGILOPAY_PUBLIC_KEY,
+  secretKey: process.env.SIGILOPAY_SECRET_KEY,
 };
 
 // Criar instância do axios com configuração padrão para SigiloPay

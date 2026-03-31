@@ -21,11 +21,13 @@ git push origin main
 
 | Nome | Valor |
 |------|-------|
-| `VITE_SUPABASE_URL` | `https://blodznzrdzjsvaqabsvj.supabase.co` |
-| `VITE_SUPABASE_ANON_KEY` | `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJsb2R6bnpyZHpqc3ZhcWFic3ZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxNTkxNjMsImV4cCI6MjA4OTczNTE2M30.F7t6-JESd3__NjezKEmShUbXmcqGCIxWX_gnIefZPdc` |
-| `SUPABASE_SERVICE_ROLE_KEY` | `sb_publishable_yctKLARtWlYpbZzk0dkx1w_e9Udi8cA` |
-| `SIGILOPAY_PUBLIC_KEY` | `kaikegomesbrascell_dj5xs7rlxoaoew4z` |
-| `SIGILOPAY_SECRET_KEY` | `nvt3mku331xhv1d8oxmqfnp20tjecpacan3v5gk0n276u5kkhexqieuz8y3cmc9f` |
+| `VITE_SUPABASE_URL` | Sua URL do Supabase |
+| `VITE_SUPABASE_ANON_KEY` | Sua chave anônima do Supabase |
+| `SUPABASE_SERVICE_ROLE_KEY` | Sua chave de serviço do Supabase |
+| `SIGILOPAY_PUBLIC_KEY` | Sua chave pública do SigiloPay |
+| `SIGILOPAY_SECRET_KEY` | Sua chave secreta do SigiloPay |
+
+**Importante:** Copie os valores do seu arquivo `.env` local.
 
 3. Marque todas as variáveis para: **Production**, **Preview**, e **Development**
 

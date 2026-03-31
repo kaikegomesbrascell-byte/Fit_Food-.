@@ -6,22 +6,35 @@ Landing page moderna para venda do e-book "100 Receitas Fit de Apenas 3 Ingredie
 
 ### Configuração Rápida
 
-1. Conecte seu repositório na Vercel
-2. Configure as variáveis de ambiente (veja abaixo)
-3. Deploy automático!
+1. Copie `.env.example` para `.env` e preencha com suas credenciais
+2. Conecte seu repositório na Vercel
+3. Configure as variáveis de ambiente (veja abaixo)
+4. Deploy automático!
 
 ### Variáveis de Ambiente Necessárias
 
+⚠️ **IMPORTANTE:** Nunca exponha suas credenciais! Use sempre variáveis de ambiente.
+
+Copie o arquivo `.env.example` para `.env` e preencha com suas credenciais reais:
+
+```bash
+cp .env.example .env
+```
+
+Depois configure as mesmas variáveis na Vercel:
+
 ```env
 # Supabase
-VITE_SUPABASE_URL=https://blodznzrdzjsvaqabsvj.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-SUPABASE_SERVICE_ROLE_KEY=sb_publishable_yctKLARtWlYpbZzk0dkx1w...
+VITE_SUPABASE_URL=your_supabase_url_here
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
 
 # SigiloPay
-SIGILOPAY_PUBLIC_KEY=kaikegomesbrascell_dj5xs7rlxoaoew4z
-SIGILOPAY_SECRET_KEY=nvt3mku331xhv1d8oxmqfnp20tjecpacan3v5gk0n276u5kkhexqieuz8y3cmc9f
+SIGILOPAY_PUBLIC_KEY=your_sigilopay_public_key_here
+SIGILOPAY_SECRET_KEY=your_sigilopay_secret_key_here
 ```
+
+**Nota:** Copie o arquivo `.env.example` para `.env` e preencha com suas credenciais reais.
 
 Marque todas as variáveis para: **Production**, **Preview** e **Development**
 
@@ -92,8 +105,23 @@ Use o QR Code: `data:image/png;base64,${pix.base64}`
 
 ## 📚 Documentação Completa
 
+- [INICIO_RAPIDO.md](./INICIO_RAPIDO.md) - Setup em 5 minutos
+- [SEGURANCA.md](./SEGURANCA.md) - **LEIA PRIMEIRO!** Proteção de credenciais
+- [COMO_FAZER_DEPLOY.md](./COMO_FAZER_DEPLOY.md) - Guia passo a passo
 - [Setup Vercel](./VERCEL_SETUP.md) - Guia completo de deploy
 - [API SigiloPay](./SIGILOPAY_API_DOCS.md) - Documentação da API de pagamento
+- [Estrutura do Projeto](./ESTRUTURA_FINAL.md) - Arquivos e pastas
+- [Resumo do Projeto](./PROJETO_RECEITAS_FIT.md) - Visão geral completa
+
+## 🔒 Segurança
+
+⚠️ **ATENÇÃO:** Este projeto usa variáveis de ambiente para proteger credenciais sensíveis.
+
+- ✅ Arquivo `.env.example` - Seguro para commitar (template)
+- ❌ Arquivo `.env` - NUNCA commitar (contém credenciais reais)
+- ✅ Credenciais na Vercel - Configuradas via dashboard
+
+**Leia o [Guia de Segurança](./SEGURANCA.md) antes de fazer deploy!**
 
 ## 🔒 Segurança
 

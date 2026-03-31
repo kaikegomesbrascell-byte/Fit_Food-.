@@ -63,12 +63,14 @@ Landing page profissional para venda do e-book "100 Receitas Fit de Apenas 3 Ing
 ### 1. Configurar Variáveis de Ambiente na Vercel
 
 ```env
-VITE_SUPABASE_URL=https://blodznzrdzjsvaqabsvj.supabase.co
-VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
-SUPABASE_SERVICE_ROLE_KEY=sb_publishable_yctKLARtWlYpbZzk0dkx1w...
-SIGILOPAY_PUBLIC_KEY=kaikegomesbrascell_dj5xs7rlxoaoew4z
-SIGILOPAY_SECRET_KEY=nvt3mku331xhv1d8oxmqfnp20tjecpacan3v5gk0n276u5kkhexqieuz8y3cmc9f
+VITE_SUPABASE_URL=your_supabase_url_here
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key_here
+SIGILOPAY_PUBLIC_KEY=your_sigilopay_public_key_here
+SIGILOPAY_SECRET_KEY=your_sigilopay_secret_key_here
 ```
+
+**Importante:** Use os valores do seu arquivo `.env` local. Copie de `.env.example` e preencha com suas credenciais reais.
 
 ### 2. Fazer Deploy
 

@@ -25,10 +25,14 @@ src/
 .claude/
 .vscode/
 
-# Variáveis de ambiente
+# Variáveis de ambiente (NUNCA COMMITAR!)
 .env
 .env.local
 .env.production
+.env.*.local
+
+# Manter apenas o exemplo
+!.env.example
 
 # Logs
 *.log
