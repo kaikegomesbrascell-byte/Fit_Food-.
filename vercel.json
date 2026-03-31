@@ -6,5 +6,11 @@
     "api/**/*.js": {
       "maxDuration": 10
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/checkout.html",
+      "destination": "/checkout.html"
+    }
+  ]
 }
