@@ -178,6 +178,9 @@ module.exports = async (req, res) => {
       // Se não conseguiu criar user_id, usar o customer.id como fallback
       const subscriptionUserId = userId || customerData.id;
       
+      console.log('📝 Tentando criar subscription com user_id:', subscriptionUserId);
+      console.log('📝 Plan:', plan);
+      
       const { data, error } = await supabase
         .from('subscriptions')
         .insert({
@@ -198,10 +201,16 @@ module.exports = async (req, res) => {
       console.log('✅ Subscription criada (pending):', subscriptionData.id);
     } catch (dbError) {
       console.error('❌ Erro ao criar subscription:', dbError);
+      console.error('❌ Detalhes do erro:', JSON.stringify(dbError, null, 2));
       return res.status(500).json({
         success: false,
         message: 'Erro ao criar assinatura',
         error: dbError.message || dbError,
+        details: {
+          code: dbError.code,
+          hint: dbError.hint,
+          details: dbError.details,
+        }
       });
     }
 
