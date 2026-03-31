@@ -236,6 +236,7 @@
 
         .loading.show {
             display: block;
+            animation: fadeIn 0.3s ease;
         }
 
         .spinner {
@@ -248,9 +249,20 @@
             margin: 0 auto 16px;
         }
 
+        .loading p {
+            color: var(--text);
+            font-size: 16px;
+            margin-top: 16px;
+        }
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @media (max-width: 768px) {
@@ -274,7 +286,7 @@
                 <h3>Resumo do Pedido</h3>
                 <div class="product-item">
                     <span>100 Receitas Fit (E-book PDF)</span>
-                    <span>R$ 47,00</span>
+                    <span>R$ 29,87</span>
                 </div>
                 <div class="product-item">
                     <span>Acesso Imediato</span>
@@ -284,7 +296,7 @@
                     <span>Garantia de 7 Dias</span>
                     <span>✅</span>
                 </div>
-                <div class="product-price">R$ 47,00</div>
+                <div class="product-price">R$ 29,87</div>
             </div>
 
             <form id="checkoutForm">
@@ -326,7 +338,7 @@
                 </div>
 
                 <button type="submit" class="btn-primary" id="submitBtn">
-                    🔒 Finalizar Compra - R$ 47,00
+                    🔒 Comprar Agora com Segurança - R$ 29,87
                 </button>
 
                 <div class="security-badge">
@@ -336,18 +348,25 @@
 
             <div class="loading" id="loading">
                 <div class="spinner"></div>
-                <p>Processando pagamento...</p>
+                <p style="font-weight: 600; color: var(--primary);">Gerando seu QR Code PIX...</p>
+                <p style="font-size: 14px; margin-top: 8px;">Aguarde alguns segundos</p>
             </div>
 
             <div class="qr-code-container" id="qrCodeContainer">
-                <h3>Escaneie o QR Code para Pagar</h3>
+                <h3 style="color: var(--primary); margin-bottom: 16px;">✅ QR Code Gerado com Sucesso!</h3>
+                <p style="color: var(--text); margin-bottom: 24px;">
+                    Escaneie o QR Code abaixo com o app do seu banco para pagar
+                </p>
                 <img id="qrCodeImage" src="" alt="QR Code PIX">
-                <p>Ou copie o código PIX:</p>
+                <p style="margin-top: 24px; font-weight: 600; color: var(--dark);">Ou copie o código PIX:</p>
                 <div class="pix-code" id="pixCode"></div>
                 <button class="copy-btn" onclick="copyPixCode()">📋 Copiar Código PIX</button>
-                <p style="margin-top: 24px; color: var(--text);">
-                    Após o pagamento, você receberá o e-book no seu e-mail em até 5 minutos.
-                </p>
+                <div style="margin-top: 32px; padding: 20px; background: rgba(16, 185, 129, 0.1); border-radius: 12px; border-left: 4px solid var(--primary);">
+                    <p style="color: var(--dark); font-weight: 600; margin-bottom: 8px;">⏱️ Pagamento expira em 1 hora</p>
+                    <p style="color: var(--text); font-size: 14px;">
+                        Após o pagamento, você receberá o e-book no seu email <strong id="userEmail"></strong> em até 5 minutos.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -390,8 +409,8 @@
         document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
             const cpf = document.getElementById('cpf').value.replace(/\D/g, '');
             const phone = document.getElementById('phone').value.replace(/\D/g, '');
 
@@ -401,8 +420,24 @@
                 return;
             }
 
+            // Validar email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Por favor, digite um email válido.');
+                document.getElementById('email').focus();
+                return;
+            }
+
             if (cpf.length !== 11) {
                 alert('CPF inválido. Digite 11 dígitos.');
+                document.getElementById('cpf').focus();
+                return;
+            }
+
+            // Validar nome (mínimo 3 caracteres)
+            if (name.length < 3) {
+                alert('Por favor, digite seu nome completo.');
+                document.getElementById('name').focus();
                 return;
             }
 
@@ -420,7 +455,7 @@
                 }
             } catch (error) {
                 console.error('Erro:', error);
-                alert('Erro ao processar pagamento. Tente novamente.');
+                alert('Erro ao processar pagamento: ' + (error.message || 'Tente novamente.'));
                 document.getElementById('checkoutForm').style.display = 'block';
                 document.getElementById('loading').classList.remove('show');
             }
@@ -436,7 +471,7 @@
                 },
                 body: JSON.stringify({
                     identifier: identifier,
-                    amount: 47,
+                    amount: 29.87,
                     client: {
                         name: name,
                         email: email,
@@ -449,15 +484,25 @@
 
             const data = await response.json();
 
+            if (!response.ok) {
+                throw new Error(data.message || 'Erro ao processar pagamento');
+            }
+
             if (data.pix && data.pix.base64) {
                 // Show QR Code
                 document.getElementById('loading').classList.remove('show');
                 document.getElementById('qrCodeImage').src = `data:image/png;base64,${data.pix.base64}`;
                 document.getElementById('pixCode').textContent = data.pix.code;
                 pixCodeText = data.pix.code;
+                document.getElementById('userEmail').textContent = email;
                 document.getElementById('qrCodeContainer').classList.add('show');
+                
+                // Scroll suave até o QR Code
+                setTimeout(() => {
+                    document.getElementById('qrCodeContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
             } else {
-                throw new Error('Erro ao gerar QR Code');
+                throw new Error('QR Code não foi gerado. Tente novamente.');
             }
         }
 
@@ -466,9 +511,14 @@
                 const btn = event.target;
                 const originalText = btn.textContent;
                 btn.textContent = '✅ Copiado!';
+                btn.style.background = '#10B981';
                 setTimeout(() => {
                     btn.textContent = originalText;
+                    btn.style.background = '';
                 }, 2000);
+            }).catch(err => {
+                alert('Erro ao copiar. Selecione e copie manualmente.');
+                console.error('Erro ao copiar:', err);
             });
         }
     </script>
