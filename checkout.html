@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - 100 Receitas Fit</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,58 +12,48 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #10B981;
-            --secondary: #F59E0B;
-            --dark: #1F2937;
-            --light: #F9FAFB;
-            --white: #FFFFFF;
-            --text: #374151;
-            --border: #E5E7EB;
-            --error: #EF4444;
-        }
-
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--light);
-            color: var(--text);
-            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
         }
 
         .container {
             max-width: 600px;
-            margin: 40px auto;
-            padding: 0 24px;
+            margin: 0 auto;
         }
 
-        .checkout-card {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 48px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
         h1 {
             font-size: 32px;
-            color: var(--dark);
+            color: #1F2937;
             margin-bottom: 8px;
+            text-align: center;
         }
 
         .subtitle {
-            color: var(--text);
+            text-align: center;
+            color: #6B7280;
             margin-bottom: 32px;
         }
 
         .product-summary {
-            background: var(--light);
+            background: #F9FAFB;
             padding: 24px;
-            border-radius: 12px;
+            border-radius: 16px;
             margin-bottom: 32px;
         }
 
         .product-summary h3 {
             font-size: 18px;
-            color: var(--dark);
+            color: #1F2937;
             margin-bottom: 16px;
         }
 
@@ -72,13 +61,15 @@
             display: flex;
             justify-content: space-between;
             margin-bottom: 12px;
+            font-size: 15px;
         }
 
         .product-price {
-            font-size: 32px;
-            font-weight: 800;
-            color: var(--primary);
+            font-size: 48px;
+            font-weight: 900;
+            color: #10B981;
             margin-top: 16px;
+            text-align: center;
         }
 
         .form-group {
@@ -89,14 +80,14 @@
             display: block;
             font-weight: 600;
             margin-bottom: 8px;
-            color: var(--dark);
+            color: #1F2937;
         }
 
         input {
             width: 100%;
             padding: 14px;
-            border: 2px solid var(--border);
-            border-radius: 8px;
+            border: 2px solid #E5E7EB;
+            border-radius: 12px;
             font-size: 16px;
             font-family: 'Poppins', sans-serif;
             transition: border-color 0.3s;
@@ -104,17 +95,7 @@
 
         input:focus {
             outline: none;
-            border-color: var(--primary);
-        }
-
-        input.error {
-            border-color: var(--error);
-        }
-
-        .error-message {
-            color: var(--error);
-            font-size: 14px;
-            margin-top: 4px;
+            border-color: #10B981;
         }
 
         .payment-methods {
@@ -126,7 +107,7 @@
 
         .payment-method {
             padding: 20px;
-            border: 2px solid var(--border);
+            border: 2px solid #E5E7EB;
             border-radius: 12px;
             text-align: center;
             cursor: pointer;
@@ -134,29 +115,29 @@
         }
 
         .payment-method:hover {
-            border-color: var(--primary);
+            border-color: #10B981;
         }
 
         .payment-method.active {
-            border-color: var(--primary);
+            border-color: #10B981;
             background: rgba(16, 185, 129, 0.05);
         }
 
-        .payment-method-icon {
+        .payment-icon {
             font-size: 32px;
             margin-bottom: 8px;
         }
 
-        .payment-method-name {
+        .payment-name {
             font-weight: 600;
-            color: var(--dark);
+            color: #1F2937;
         }
 
         .btn-primary {
             width: 100%;
             padding: 18px;
-            background: var(--primary);
-            color: var(--white);
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
             border: none;
             border-radius: 50px;
             font-size: 18px;
@@ -166,29 +147,48 @@
         }
 
         .btn-primary:hover {
-            background: #059669;
             transform: translateY(-2px);
-        }
-
-        .btn-primary:disabled {
-            background: #9CA3AF;
-            cursor: not-allowed;
-            transform: none;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
         }
 
         .security-badge {
             text-align: center;
             margin-top: 24px;
-            color: var(--text);
+            color: #6B7280;
             font-size: 14px;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #E5E7EB;
+            border-top: 4px solid #10B981;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .qr-code-container {
             display: none;
             text-align: center;
             padding: 32px;
-            background: var(--light);
-            border-radius: 12px;
+            background: #F9FAFB;
+            border-radius: 16px;
             margin-top: 24px;
         }
 
@@ -199,12 +199,13 @@
         .qr-code-container img {
             max-width: 300px;
             margin: 24px auto;
-            border: 4px solid var(--white);
+            border: 4px solid white;
             border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         .pix-code {
-            background: var(--white);
+            background: white;
             padding: 16px;
             border-radius: 8px;
             word-break: break-all;
@@ -215,8 +216,8 @@
 
         .copy-btn {
             padding: 12px 24px;
-            background: var(--secondary);
-            color: var(--white);
+            background: #F59E0B;
+            color: white;
             border: none;
             border-radius: 8px;
             font-weight: 600;
@@ -228,46 +229,9 @@
             background: #D97706;
         }
 
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 40px;
-        }
-
-        .loading.show {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .spinner {
-            border: 4px solid var(--border);
-            border-top: 4px solid var(--primary);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 16px;
-        }
-
-        .loading p {
-            color: var(--text);
-            font-size: 16px;
-            margin-top: 16px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         @media (max-width: 768px) {
-            .checkout-card {
-                padding: 24px;
+            .card {
+                padding: 32px 24px;
             }
 
             .payment-methods {
@@ -278,7 +242,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="checkout-card">
+        <div class="card">
             <h1>🥗 Finalizar Compra</h1>
             <p class="subtitle">Preencha seus dados para receber o e-book</p>
 
@@ -302,42 +266,39 @@
             <form id="checkoutForm">
                 <div class="form-group">
                     <label for="name">Nome Completo *</label>
-                    <input type="text" id="name" required>
-                    <div class="error-message" id="nameError"></div>
+                    <input type="text" id="name" required placeholder="João Silva">
                 </div>
 
                 <div class="form-group">
                     <label for="email">E-mail *</label>
-                    <input type="email" id="email" required>
-                    <div class="error-message" id="emailError"></div>
+                    <input type="email" id="email" required placeholder="joao@email.com">
                 </div>
 
                 <div class="form-group">
                     <label for="cpf">CPF *</label>
-                    <input type="text" id="cpf" required maxlength="14">
-                    <div class="error-message" id="cpfError"></div>
+                    <input type="text" id="cpf" required maxlength="14" placeholder="000.000.000-00">
                 </div>
 
                 <div class="form-group">
                     <label for="phone">WhatsApp (opcional)</label>
-                    <input type="tel" id="phone" maxlength="15">
+                    <input type="tel" id="phone" maxlength="15" placeholder="(00) 00000-0000">
                 </div>
 
                 <div class="form-group">
                     <label>Forma de Pagamento *</label>
                     <div class="payment-methods">
                         <div class="payment-method active" data-method="pix">
-                            <div class="payment-method-icon">📱</div>
-                            <div class="payment-method-name">PIX</div>
+                            <div class="payment-icon">📱</div>
+                            <div class="payment-name">PIX</div>
                         </div>
                         <div class="payment-method" data-method="card">
-                            <div class="payment-method-icon">💳</div>
-                            <div class="payment-method-name">Cartão</div>
+                            <div class="payment-icon">💳</div>
+                            <div class="payment-name">Cartão</div>
                         </div>
                     </div>
                 </div>
 
-                <button type="submit" class="btn-primary" id="submitBtn">
+                <button type="submit" class="btn-primary">
                     🔒 Comprar Agora com Segurança - R$ 29,87
                 </button>
 
@@ -348,23 +309,23 @@
 
             <div class="loading" id="loading">
                 <div class="spinner"></div>
-                <p style="font-weight: 600; color: var(--primary);">Gerando seu QR Code PIX...</p>
+                <p style="font-weight: 600; color: #10B981;">Gerando seu QR Code PIX...</p>
                 <p style="font-size: 14px; margin-top: 8px;">Aguarde alguns segundos</p>
             </div>
 
             <div class="qr-code-container" id="qrCodeContainer">
-                <h3 style="color: var(--primary); margin-bottom: 16px;">✅ QR Code Gerado com Sucesso!</h3>
-                <p style="color: var(--text); margin-bottom: 24px;">
-                    Escaneie o QR Code abaixo com o app do seu banco para pagar
+                <h3 style="color: #10B981; margin-bottom: 16px;">✅ QR Code Gerado!</h3>
+                <p style="color: #6B7280; margin-bottom: 24px;">
+                    Escaneie o QR Code abaixo com o app do seu banco
                 </p>
                 <img id="qrCodeImage" src="" alt="QR Code PIX">
-                <p style="margin-top: 24px; font-weight: 600; color: var(--dark);">Ou copie o código PIX:</p>
+                <p style="margin-top: 24px; font-weight: 600; color: #1F2937;">Ou copie o código PIX:</p>
                 <div class="pix-code" id="pixCode"></div>
                 <button class="copy-btn" onclick="copyPixCode()">📋 Copiar Código PIX</button>
-                <div style="margin-top: 32px; padding: 20px; background: rgba(16, 185, 129, 0.1); border-radius: 12px; border-left: 4px solid var(--primary);">
-                    <p style="color: var(--dark); font-weight: 600; margin-bottom: 8px;">⏱️ Pagamento expira em 1 hora</p>
-                    <p style="color: var(--text); font-size: 14px;">
-                        Após o pagamento, você receberá o e-book no seu email <strong id="userEmail"></strong> em até 5 minutos.
+                <div style="margin-top: 32px; padding: 20px; background: rgba(16, 185, 129, 0.1); border-radius: 12px;">
+                    <p style="color: #1F2937; font-weight: 600; margin-bottom: 8px;">⏱️ Pagamento expira em 1 hora</p>
+                    <p style="color: #6B7280; font-size: 14px;">
+                        Após o pagamento, você receberá o e-book no email <strong id="userEmail"></strong> em até 5 minutos.
                     </p>
                 </div>
             </div>
@@ -420,24 +381,19 @@
                 return;
             }
 
-            // Validar email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 alert('Por favor, digite um email válido.');
-                document.getElementById('email').focus();
                 return;
             }
 
             if (cpf.length !== 11) {
                 alert('CPF inválido. Digite 11 dígitos.');
-                document.getElementById('cpf').focus();
                 return;
             }
 
-            // Validar nome (mínimo 3 caracteres)
             if (name.length < 3) {
                 alert('Por favor, digite seu nome completo.');
-                document.getElementById('name').focus();
                 return;
             }
 
@@ -464,12 +420,7 @@
         async function processPixPayment(name, email, cpf, phone) {
             const identifier = `receitas-fit-${Date.now()}`;
             
-            // Detectar se está em produção ou local
-            const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-                ? 'http://localhost:3000/api/payment-pix'  // Local (precisa do servidor rodando)
-                : '/api/payment-pix';  // Produção (Vercel)
-            
-            const response = await fetch(apiUrl, {
+            const response = await fetch('/api/payment-pix', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -494,7 +445,6 @@
             }
 
             if (data.pix && data.pix.base64) {
-                // Show QR Code
                 document.getElementById('loading').classList.remove('show');
                 document.getElementById('qrCodeImage').src = `data:image/png;base64,${data.pix.base64}`;
                 document.getElementById('pixCode').textContent = data.pix.code;
@@ -502,7 +452,6 @@
                 document.getElementById('userEmail').textContent = email;
                 document.getElementById('qrCodeContainer').classList.add('show');
                 
-                // Scroll suave até o QR Code
                 setTimeout(() => {
                     document.getElementById('qrCodeContainer').scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }, 100);
@@ -523,7 +472,6 @@
                 }, 2000);
             }).catch(err => {
                 alert('Erro ao copiar. Selecione e copie manualmente.');
-                console.error('Erro ao copiar:', err);
             });
         }
     </script>
